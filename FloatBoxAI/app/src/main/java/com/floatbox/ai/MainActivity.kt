@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.widget.SeekBar
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +15,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.floatbox.ai.databinding.ActivityMainBinding
+import kotlin.math.roundToInt
 
 class MainActivity : AppCompatActivity() {
 
@@ -55,19 +57,46 @@ class MainActivity : AppCompatActivity() {
             binding.rbBubbleNormal.isChecked = true
         }
 
+        val savedAlpha = prefs.getFloat(KEY_BUBBLE_ALPHA, 0.85f).coerceIn(0.05f, 1.0f)
+        val savedPercent = (savedAlpha * 100f).roundToInt().coerceIn(5, 100)
+        binding.sbBubbleAlpha.progress = savedPercent - 5
+        binding.tvBubbleAlpha.text = "$savedPercent%"
+
+        binding.sbBubbleAlpha.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                val pct = (progress + 5).coerceIn(5, 100)
+                binding.tvBubbleAlpha.text = "$pct%"
+                if (fromUser) {
+                    prefs.edit().putFloat(KEY_BUBBLE_ALPHA, pct / 100f).apply()
+                    notifyBubbleStyleChanged()
+                }
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+        })
+
         binding.rgBubbleSize.setOnCheckedChangeListener { _, checkedId ->
             val smallSelected = checkedId == R.id.rbBubbleSmall
             prefs.edit().putBoolean(KEY_BUBBLE_SMALL, smallSelected).apply()
-            if (FloatingOverlayService.isRunning) {
-                val updateIntent = Intent(this, FloatingOverlayService::class.java).apply {
-                    action = FloatingOverlayService.ACTION_UPDATE_BUBBLE_SIZE
-                }
-                startService(updateIntent)
-            }
+            notifyBubbleStyleChanged()
         }
 
         binding.btnGrantOverlay.setOnClickListener {
             requestOverlayPermission()
+        }
+
+        binding.btnBatterySettings.setOnClickListener {
+            val appSettings = Intent(
+                Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                Uri.parse("package:$packageName")
+            )
+            startActivity(appSettings)
+            Toast.makeText(
+                this,
+                "Pilih Baterai -> Tidak ada pembatasan, dan aktifkan Perizinan pop-up latar belakang.",
+                Toast.LENGTH_LONG
+            ).show()
         }
 
         binding.btnToggleFloatBox.setOnClickListener {
@@ -91,7 +120,21 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+        val savedAlpha = prefs.getFloat(KEY_BUBBLE_ALPHA, 0.85f).coerceIn(0.05f, 1.0f)
+        val savedPercent = (savedAlpha * 100f).roundToInt().coerceIn(5, 100)
+        binding.sbBubbleAlpha.progress = savedPercent - 5
+        binding.tvBubbleAlpha.text = "$savedPercent%"
         updateUiState()
+    }
+
+    private fun notifyBubbleStyleChanged() {
+        if (FloatingOverlayService.isRunning) {
+            val updateIntent = Intent(this, FloatingOverlayService::class.java).apply {
+                action = FloatingOverlayService.ACTION_UPDATE_BUBBLE_STYLE
+            }
+            startService(updateIntent)
+        }
     }
 
     private fun requestOverlayPermission() {
@@ -159,5 +202,6 @@ class MainActivity : AppCompatActivity() {
     companion object {
         const val PREFS_NAME = "floatbox_prefs"
         const val KEY_BUBBLE_SMALL = "bubble_small"
+        const val KEY_BUBBLE_ALPHA = "bubble_alpha"
     }
 }

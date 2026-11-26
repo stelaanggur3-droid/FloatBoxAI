@@ -20,12 +20,12 @@
             android:background="@color/navy_primary"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingStart="14dp"
-            android:paddingEnd="8dp">
+            android:paddingStart="12dp"
+            android:paddingEnd="6dp">
 
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:src="@drawable/ic_floatbox_logo" />
 
             <TextView
@@ -37,34 +37,52 @@
                 android:maxLines="1"
                 android:text="@string/app_name"
                 android:textColor="@color/white"
-                android:textSize="14sp"
+                android:textSize="13sp"
                 android:textStyle="bold" />
 
             <ImageButton
+                android:id="@+id/btnQuickScan"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Scan Layar Cepat"
+                android:padding="5dp"
+                android:src="@drawable/ic_scan_screen" />
+
+            <ImageButton
+                android:id="@+id/btnOpacity"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Transparansi Ikon"
+                android:padding="5dp"
+                android:src="@drawable/ic_opacity" />
+
+            <ImageButton
                 android:id="@+id/btnMinimize"
-                android:layout_width="34dp"
-                android:layout_height="34dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="Minimize"
-                android:padding="6dp"
+                android:padding="5dp"
                 android:src="@drawable/ic_minimize" />
 
             <ImageButton
                 android:id="@+id/btnMaximize"
-                android:layout_width="34dp"
-                android:layout_height="34dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="Maximize"
-                android:padding="7dp"
+                android:padding="6dp"
                 android:src="@drawable/ic_maximize" />
 
             <ImageButton
                 android:id="@+id/btnClose"
-                android:layout_width="34dp"
-                android:layout_height="34dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="Close"
-                android:padding="6dp"
+                android:padding="5dp"
                 android:src="@drawable/ic_close" />
         </LinearLayout>
 
@@ -234,43 +252,79 @@
                     android:orientation="vertical"
                     android:padding="12dp">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnScanScreen"
+                            android:layout_width="0dp"
+                            android:layout_height="44dp"
+                            android:layout_marginEnd="6dp"
+                            android:layout_weight="1.25"
+                            android:text="@string/btn_scan_screen"
+                            android:textSize="12sp"
+                            app:backgroundTint="@color/blue_accent"
+                            app:cornerRadius="12dp"
+                            app:icon="@drawable/ic_scan_screen" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnPickImage"
+                            android:layout_width="0dp"
+                            android:layout_height="44dp"
+                            android:layout_weight="1"
+                            android:text="@string/btn_pick_image"
+                            android:textSize="12sp"
+                            app:backgroundTint="@color/navy_surface"
+                            app:cornerRadius="12dp"
+                            app:icon="@drawable/ic_gallery" />
+                    </LinearLayout>
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/switchAutoSearch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:checked="true"
+                        android:text="@string/auto_search_label"
+                        android:textColor="@color/text_primary"
+                        android:textSize="12sp" />
+
+                    <com.floatbox.ai.CropImageView
+                        android:id="@+id/cropImageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/bg_card_ocr"
+                        android:visibility="gone" />
+
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnPickImage"
+                        android:id="@+id/btnScanCrop"
                         android:layout_width="match_parent"
                         android:layout_height="44dp"
-                        android:text="@string/btn_pick_image"
-                        android:textSize="13sp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/btn_scan_crop"
+                        android:textSize="12sp"
+                        android:visibility="gone"
                         app:backgroundTint="@color/blue_accent"
-                        app:cornerRadius="12dp"
-                        app:icon="@drawable/ic_gallery" />
-
-                    <ImageView
-                        android:id="@+id/ivOcrPreview"
-                        android:layout_width="match_parent"
-                        android:layout_height="130dp"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/bg_card_ocr"
-                        android:contentDescription="Preview Gambar OCR"
-                        android:padding="4dp"
-                        android:scaleType="centerInside"
-                        android:visibility="gone" />
+                        app:cornerRadius="12dp" />
 
                     <ProgressBar
                         android:id="@+id/ocrProgressBar"
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="8dp"
                         android:indeterminateTint="@color/blue_accent"
                         android:visibility="gone" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:layout_weight="1"
                         android:background="@drawable/bg_card_ocr"
-                        android:minHeight="140dp"
+                        android:minHeight="110dp"
                         android:orientation="vertical"
                         android:padding="12dp">
 
@@ -291,24 +345,42 @@
                             android:gravity="top|start"
                             android:hint="@string/ocr_placeholder"
                             android:inputType="textMultiLine"
-                            android:minLines="5"
+                            android:minLines="3"
                             android:textColor="@color/text_primary"
                             android:textColorHint="@color/text_secondary"
                             android:textIsSelectable="true"
                             android:textSize="13sp" />
                     </LinearLayout>
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnCopyOcr"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="44dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="16dp"
-                        android:text="@string/btn_copy_text"
-                        android:textSize="13sp"
-                        app:backgroundTint="@color/navy_primary"
-                        app:cornerRadius="12dp"
-                        app:icon="@drawable/ic_copy" />
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnSearchOcr"
+                            android:layout_width="0dp"
+                            android:layout_height="44dp"
+                            android:layout_marginEnd="6dp"
+                            android:layout_weight="1"
+                            android:text="@string/btn_search_ocr"
+                            android:textSize="12sp"
+                            app:backgroundTint="@color/blue_accent"
+                            app:cornerRadius="12dp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnCopyOcr"
+                            android:layout_width="0dp"
+                            android:layout_height="44dp"
+                            android:layout_weight="1"
+                            android:text="@string/btn_copy_text"
+                            android:textSize="12sp"
+                            app:backgroundTint="@color/navy_primary"
+                            app:cornerRadius="12dp"
+                            app:icon="@drawable/ic_copy" />
+                    </LinearLayout>
                 </LinearLayout>
             </ScrollView>
         </FrameLayout>

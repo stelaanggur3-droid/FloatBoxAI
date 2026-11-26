@@ -1,28 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">FloatBox AI</string>
-    <string name="app_subtitle">Jendela Mengambang Mini Browser &amp; OCR Lokal</string>
+    <string name="app_subtitle">Jendela Mengambang Mini Browser &amp; Scan Layar OCR</string>
     <string name="permission_overlay_title">Izin Display Over Other Apps</string>
     <string name="permission_overlay_granted">Izin Overlay Aktif</string>
     <string name="permission_overlay_denied">Izin Overlay Belum Diberikan</string>
     <string name="btn_grant_overlay">Izinkan Overlay</string>
+    <string name="btn_battery_settings">Pengaturan Baterai &amp; Pop-up Latar</string>
     <string name="btn_start_floatbox">Jalankan FloatBox</string>
     <string name="btn_stop_floatbox">Matikan FloatBox</string>
-    <string name="bubble_size_title">Ukuran Floating Bubble</string>
+    <string name="bubble_size_title">Ukuran &amp; Transparansi Ikon Bubble</string>
     <string name="bubble_small">Kecil (Ringkas)</string>
     <string name="bubble_normal">Normal</string>
+    <string name="bubble_alpha_label">Transparansi Ikon:</string>
     <string name="tab_browser">Mini Browser</string>
-    <string name="tab_ocr">OCR Gambar</string>
+    <string name="tab_ocr">Scan Layar / OCR</string>
     <string name="hint_url">Ketik URL atau cari di Google...</string>
-    <string name="btn_pick_image">Pilih Gambar dari Galeri</string>
+    <string name="btn_scan_screen">Scan Layar</string>
+    <string name="btn_pick_image">Dari Galeri</string>
+    <string name="btn_scan_crop">Scan Kotak &amp; Cari di Google</string>
+    <string name="btn_search_ocr">Cari di Google</string>
     <string name="btn_copy_text">Salin Teks</string>
-    <string name="ocr_placeholder">Pilih gambar dari galeri untuk membaca teks secara lokal menggunakan ML Kit.</string>
+    <string name="auto_search_label">Otomatis cari di Google setelah scan</string>
+    <string name="ocr_placeholder">Tekan Scan Layar, tarik kotak di teks yang ingin dicari, lalu tekan Scan Kotak &amp; Cari di Google.</string>
+    <string name="ocr_crop_ready">Tarik kotak biru pada teks yang ingin dicari, lalu tekan tombol Scan Kotak &amp; Cari di Google.</string>
     <string name="ocr_processing">Memindai teks di perangkat...</string>
-    <string name="ocr_empty">Tidak ada teks terdeteksi pada gambar ini.</string>
+    <string name="ocr_empty">Tidak ada teks terdeteksi pada area ini.</string>
     <string name="text_copied">Teks berhasil disalin ke clipboard</string>
     <string name="notif_channel_name">Layanan FloatBox AI</string>
     <string name="notif_title">FloatBox AI Aktif</string>
-    <string name="notif_desc">Ketuk untuk membuka panel mengambang</string>
+    <string name="notif_desc">Ketuk untuk membuka panel atau memunculkan bubble</string>
     <string name="notif_action_open">Buka Panel</string>
+    <string name="notif_action_bubble">Bubble</string>
     <string name="notif_action_stop">Tutup</string>
 </resources>
