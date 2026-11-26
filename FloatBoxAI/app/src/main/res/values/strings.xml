@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FloatBox AI</string>
+    <string name="app_subtitle">Jendela Mengambang Mini Browser &amp; OCR Lokal</string>
+    <string name="permission_overlay_title">Izin Display Over Other Apps</string>
+    <string name="permission_overlay_granted">Izin Overlay Aktif</string>
+    <string name="permission_overlay_denied">Izin Overlay Belum Diberikan</string>
+    <string name="btn_grant_overlay">Izinkan Overlay</string>
+    <string name="btn_start_floatbox">Jalankan FloatBox</string>
+    <string name="btn_stop_floatbox">Matikan FloatBox</string>
+    <string name="bubble_size_title">Ukuran Floating Bubble</string>
+    <string name="bubble_small">Kecil (Ringkas)</string>
+    <string name="bubble_normal">Normal</string>
+    <string name="tab_browser">Mini Browser</string>
+    <string name="tab_ocr">OCR Gambar</string>
+    <string name="hint_url">Ketik URL atau cari di Google...</string>
+    <string name="btn_pick_image">Pilih Gambar dari Galeri</string>
+    <string name="btn_copy_text">Salin Teks</string>
+    <string name="ocr_placeholder">Pilih gambar dari galeri untuk membaca teks secara lokal menggunakan ML Kit.</string>
+    <string name="ocr_processing">Memindai teks di perangkat...</string>
+    <string name="ocr_empty">Tidak ada teks terdeteksi pada gambar ini.</string>
+    <string name="text_copied">Teks berhasil disalin ke clipboard</string>
+    <string name="notif_channel_name">Layanan FloatBox AI</string>
+    <string name="notif_title">FloatBox AI Aktif</string>
+    <string name="notif_desc">Ketuk untuk membuka panel mengambang</string>
+    <string name="notif_action_open">Buka Panel</string>
+    <string name="notif_action_stop">Tutup</string>
+</resources>
