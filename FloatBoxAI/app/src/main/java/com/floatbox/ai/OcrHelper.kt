@@ -13,6 +13,29 @@ object OcrHelper {
 
     private val executor = Executors.newSingleThreadExecutor()
 
+    fun recognizeTextFromBitmap(
+        bitmap: Bitmap,
+        onSuccess: (String) -> Unit,
+        onError: (String) -> Unit
+    ) {
+        try {
+            val inputImage = InputImage.fromBitmap(bitmap, 0)
+            val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
+
+            recognizer.process(inputImage)
+                .addOnSuccessListener { visionText ->
+                    recognizer.close()
+                    onSuccess(visionText.text.trim())
+                }
+                .addOnFailureListener { e ->
+                    recognizer.close()
+                    onError(e.localizedMessage ?: "Gagal memproses OCR.")
+                }
+        } catch (e: Exception) {
+            onError(e.localizedMessage ?: "Gagal memindai gambar.")
+        }
+    }
+
     fun recognizeTextFromUri(
         context: Context,
         imageUri: Uri,
@@ -21,7 +44,7 @@ object OcrHelper {
         onError: (String) -> Unit
     ) {
         executor.execute {
-            val previewBitmap = decodeScaledBitmap(context, imageUri, 900)
+            val previewBitmap = decodeScaledBitmap(context, imageUri, 1600)
             onPreviewReady(previewBitmap)
         }
 
